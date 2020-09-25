@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taskplanner/Screens/Global_Widgets/Upper-AppBar.dart';
 import 'package:intl/intl.dart';
 
+import '../../Provider.dart';
 import '../../constants.dart';
 import 'LocalWidgets/Goals.dart';
 import 'LocalWidgets/My-Habits.dart';
@@ -19,57 +21,62 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
+  var theDataProvider;
+
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            UpperAppBar(
-              middleText: widget.todaysDate,
-            ),
-            Padding(
-              padding: mainPagePadding,
-              child: SectionTitle(),
-            ),
-            Container(
-              height: 120,
-              child: Goals(),
-            ),
-            Padding(
-              padding: mainPagePadding,
-              child: SubSectionTitle(
-                title: "My Habits",
-                completedHabits: "1/3",
+    theDataProvider = Provider.of<TheData>(context, listen: false);
+
+    return Consumer<TheData>(
+      builder: (context, value, child) => SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              UpperAppBar(
+                middleText: widget.todaysDate,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 16, bottom: 8),
-              child: Container(
-                height: 100,
-                width: double.infinity,
-                child: MyHabit(),
+              Padding(
+                padding: mainPagePadding,
+                child: SectionTitle(),
               ),
-            ),
-            Padding(
-              padding: mainPagePadding,
-              child: SubSectionTitle(
-                title: "Today",
-                completedHabits: "1/3",
+              Container(
+                height: 120,
+                child: Goals(),
               ),
-            ),
-            Container(
-              height: 120,
-              child: TodaysNote(),
-            ),
-            Padding(
-              padding: mainPagePadding,
-              child: SubSectionTitle(
-                title: "Tomorrow",
-                completedHabits: "1/3",
+              Padding(
+                padding: mainPagePadding,
+                child: SubSectionTitle(
+                  title: "My habits",
+                  completedHabits: "1/3",
+                ),
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.only(left: 16, bottom: 8),
+                child: Container(
+                  height: 100,
+                  width: double.infinity,
+                  child: MyHabit(),
+                ),
+              ),
+              Padding(
+                padding: mainPagePadding,
+                child: SubSectionTitle(
+                  title: "Today",
+                  completedHabits: "1/3",
+                ),
+              ),
+              Container(
+                height: 120,
+                child: TodaysNote(),
+              ),
+              Padding(
+                padding: mainPagePadding,
+                child: SubSectionTitle(
+                  title: "Tomorrow",
+                  completedHabits: "1/3",
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

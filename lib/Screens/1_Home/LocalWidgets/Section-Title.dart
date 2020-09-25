@@ -10,7 +10,7 @@ class SectionTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "My Goals",
+            "My goals",
             style: kSectionAndSubSectionTitle,
           ),
           Text(

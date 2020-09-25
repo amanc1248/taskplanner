@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:taskplanner/Screens/1_Home/LocalWidgets/TodaysNoteClass.dart';
 import 'package:taskplanner/Screens/AddButton.dart/AllGoalsClass.dart';
 
 import 'Screens/1_Home/LocalWidgets/My-HabitsClass.dart';
@@ -17,16 +18,16 @@ class TheData extends ChangeNotifier {
   //2) Storing the habits
   List<MyHabitClass> _myHabits = [
     MyHabitClass(
-        boxColor: Color(0xFFFFECE8),
-        boxImage: AssetImage("assets/images/reading.jpg"),
-        title: "Read Book"),
+        boxColor: Color(0xFFFFECE8), boxIcon: Icons.book, title: "Read Book"),
     MyHabitClass(
-        boxColor: Color(0xFFE6F6FF),
-        boxImage: AssetImage("assets/images/reading.jpg"),
-        title: "Training"),
+        boxColor: Color(0xFFE6F6FF), boxIcon: Icons.person, title: "Training"),
     MyHabitClass(
         boxColor: Color(0xFFFFF9EA),
-        boxImage: AssetImage("assets/images/reading.jpg"),
+        boxIcon: Icons.card_membership,
+        title: "Learn English"),
+    MyHabitClass(
+        boxColor: Color(0xFFFFF9EA),
+        boxIcon: Icons.card_membership,
         title: "Learn English")
   ];
   List<MyHabitClass> get myHabits => _myHabits;
@@ -40,6 +41,15 @@ class TheData extends ChangeNotifier {
   String get choosenDate => _choosenDate;
   set choosenDate(String val) {
     _choosenDate = val;
+    notifyListeners();
+  }
+//3.1 storing the date for the notes choosen date
+
+  String _notesChoosenDate =
+      DateFormat('y-MM-dd').format(DateTime.now()).toString();
+  String get notesChoosenDate => _notesChoosenDate;
+  set notesChoosenDate(String val) {
+    _notesChoosenDate = val;
     notifyListeners();
   }
 
@@ -60,6 +70,14 @@ class TheData extends ChangeNotifier {
     notifyListeners();
   }
 
+  //6) Storing the notes
+  List<TodaysNoteClass> _ourAllnotes = [];
+  List<TodaysNoteClass> get ourAllnotes => _ourAllnotes;
+  set ourAllnotes(List<TodaysNoteClass> val) {
+    _ourAllnotes = val;
+    notifyListeners();
+  }
+
   //selecting the goals
   showingTheDetailsBar() {
     int allTotalDays = 0;
@@ -67,7 +85,12 @@ class TheData extends ChangeNotifier {
     double allSuccessRate = 0;
     int allTotalTimes = 0;
     if (mainGoalList.isEmpty) {
-      return SizedBox();
+      return DetailsBar(
+        streakDays: allStreakDays,
+        successRate: allSuccessRate,
+        totalDays: allTotalDays,
+        totalTimesDone: allTotalTimes,
+      );
     } else {
       for (int i = 0; i < mainGoalList.length; i++) {
         if (calendarSelectedDay == mainGoalList[i].dateTime) {
@@ -79,12 +102,47 @@ class TheData extends ChangeNotifier {
           print("opps date not matched!");
         }
       }
+      return DetailsBar(
+        streakDays: allStreakDays,
+        successRate: allSuccessRate,
+        totalDays: allTotalDays,
+        totalTimesDone: allTotalTimes,
+      );
     }
-    return DetailsBar(
-      streakDays: allStreakDays,
-      successRate: allSuccessRate,
-      totalDays: allTotalDays,
-      totalTimesDone: allTotalTimes,
-    );
+  }
+
+  //showing the todays note list
+  showingTheTodaysList() {
+    List<Widget> theTodaysList = [];
+
+    if (ourAllnotes.isEmpty) {
+      return SizedBox();
+    } else {
+      for (var i = 0; i < ourAllnotes.length; i++) {
+        String todaysDate =
+            DateFormat('y-MM-dd').format(DateTime.now()).toString();
+        if ((ourAllnotes[i].dateTime == todaysDate) &&
+            (ourAllnotes[i].status == false)) {
+          theTodaysList.add(Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.orangeAccent),
+            child: CheckboxListTile(
+              title: Text(
+                ourAllnotes[i].note,
+                style: TextStyle(color: Colors.white),
+              ),
+              value: false,
+              onChanged: (bool value) {},
+              activeColor: Colors.orange,
+              checkColor: Colors.white,
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
+          ));
+        }
+      }
+    }
+    return Expanded(
+        child: ListView(
+      children: theTodaysList,
+    ));
   }
 }

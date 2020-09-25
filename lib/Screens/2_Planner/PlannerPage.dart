@@ -115,7 +115,6 @@ import 'package:taskplanner/Screens/Global_Widgets/Upper-AppBar.dart';
 
 import '../../Provider.dart';
 import 'LocalWidgets/Calendar.dart';
-import 'LocalWidgets/DetailsBar.dart';
 import 'LocalWidgets/HabitsCarousel.dart';
 import 'LocalWidgets/SkipDoneButton.dart';
 
@@ -130,7 +129,7 @@ class _PlannerPageState extends State<PlannerPage> {
   @override
   void initState() {
     super.initState();
-    theDataProvider.showingTheDetailsBar();
+    // theDataProvider.showingTheDetailsBar();
   }
 
   var theDataProvider;
@@ -142,13 +141,16 @@ class _PlannerPageState extends State<PlannerPage> {
         child: Column(
           children: [
             UpperAppBar(
-              leftIcon: Icons.arrow_left,
+              leftIcon: Icons.keyboard_arrow_left,
               middleText: "Habits",
               rightIcon: Icons.account_box,
             ),
             HabitsCarousel(),
-            Expanded(child: SkipDoneButton()),
+            SkipDoneButton(),
             Container(height: 170, child: Calendar()),
+            SizedBox(
+              height: 60,
+            ),
             theDataProvider.showingTheDetailsBar()
           ],
         ),

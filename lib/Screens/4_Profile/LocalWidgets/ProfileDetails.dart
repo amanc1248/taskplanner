@@ -9,7 +9,10 @@ class ProfileDetails extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Colors.lightGreen,
             backgroundImage: AssetImage("assets/images/reading.jpg"),
-            radius: 30,
+            radius: 25,
+          ),
+          SizedBox(
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -17,6 +20,9 @@ class ProfileDetails extends StatelessWidget {
               Text(
                 "Juilly slaony",
                 style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+              SizedBox(
+                width: 15,
               ),
               Container(
                 height: 30,
@@ -36,8 +42,11 @@ class ProfileDetails extends StatelessWidget {
               )
             ],
           ),
+          SizedBox(
+            height: 10,
+          ),
           Text("JuilySalouni@gmail.com",
-              style: TextStyle(color: Colors.white, fontSize: 16))
+              style: TextStyle(color: Colors.white70, fontSize: 16))
         ],
       ),
     );

@@ -88,6 +88,7 @@ class _CalendarState extends State<Calendar> {
             padding: const EdgeInsets.only(left: 5, right: 5),
             child: Container(
                 decoration: BoxDecoration(
+                  color: Color(0xFF79CCFB),
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: Colors.lightBlueAccent,

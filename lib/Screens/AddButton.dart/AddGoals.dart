@@ -139,6 +139,7 @@ class _AddGoalsState extends State<AddGoals> {
                     print("Cannot add null topic");
                   } else {
                     addingTheGoals();
+                    Navigator.pop(context);
                   }
                 },
                 child: Text("Add"),

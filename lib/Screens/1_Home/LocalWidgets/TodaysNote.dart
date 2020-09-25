@@ -8,7 +8,9 @@
 // so that you can reference [timeDilation].
 
 import 'package:flutter/material.dart';
-import 'package:taskplanner/Screens/1_Home/LocalWidgets/TodaysNoteClass.dart';
+import 'package:provider/provider.dart';
+
+import '../../../Provider.dart';
 
 /// This Widget is the main application widget.
 
@@ -16,39 +18,25 @@ import 'package:taskplanner/Screens/1_Home/LocalWidgets/TodaysNoteClass.dart';
 class TodaysNote extends StatefulWidget {
   TodaysNote({Key key}) : super(key: key);
   bool boxChecked = false;
-  List<TodaysNoteClass> todaysNote = [
-    TodaysNoteClass(
-        note:
-            "Make a prototype of the main page and make a presentation for the customer"),
-    TodaysNoteClass(note: "Make a prototype")
-  ];
+  // List<TodaysNoteClass> todaysNote = [
+  //   TodaysNoteClass(
+  //       note:
+  //           "Make a prototype of the main page and make a presentation for the customer"),
+  //   TodaysNoteClass(note: "Make a prototype")
+  // ];
   @override
   _TodaysNoteState createState() => _TodaysNoteState();
 }
 
 class _TodaysNoteState extends State<TodaysNote> {
-  @override
+  var theDataProvider;
+
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemCount: widget.todaysNote.length,
-        itemBuilder: (context, index) {
-          return CheckboxListTile(
-            title: Text(
-              widget.todaysNote[index].note,
-              style: TextStyle(color: Colors.white),
-            ),
-            value: widget.boxChecked,
-            onChanged: (bool value) {
-              setState(() {
-                widget.boxChecked = !widget.boxChecked;
-              });
-            },
-            activeColor: Colors.orange,
-            checkColor: Colors.white,
-            controlAffinity: ListTileControlAffinity.leading,
-          );
-        },
+    theDataProvider = Provider.of<TheData>(context, listen: false);
+
+    return Consumer<TheData>(
+      builder: (context, value, child) => Container(
+        child: theDataProvider.showingTheTodaysList(),
       ),
     );
   }

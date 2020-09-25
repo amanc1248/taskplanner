@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:taskplanner/Screens/1_Home/LocalWidgets/TodaysNoteClass.dart';
 import 'package:taskplanner/constants.dart';
+
+import '../../Provider.dart';
 
 class AddNotes extends StatefulWidget {
   @override
@@ -23,7 +28,21 @@ class _AddNotesState extends State<AddNotes> {
     super.dispose();
   }
 
+  addingTheNotes() {
+    theDataProvider.ourAllnotes.add(
+      TodaysNoteClass(
+        note: _actcontroller.text,
+        dateTime: theDataProvider.notesChoosenDate,
+        status: false,
+      ),
+    );
+    theDataProvider.showingTheTodaysList();
+  }
+
+  var theDataProvider;
   Widget build(BuildContext context) {
+    theDataProvider = Provider.of<TheData>(context, listen: false);
+
     return Container(
       decoration: BoxDecoration(
           // color: Color(0xFF1F2024),
@@ -86,7 +105,9 @@ class _AddNotesState extends State<AddNotes> {
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
                     }, onConfirm: (date) {
-                      print('confirm $date');
+                      String theConvertedDate =
+                          DateFormat('y-MM-dd').format(date).toString();
+                      theDataProvider.notesChoosenDate = theConvertedDate;
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
                   child: Container(
@@ -110,7 +131,14 @@ class _AddNotesState extends State<AddNotes> {
           ),
           Center(
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                if (_actcontroller.text == null) {
+                  print("Cannot add null topic");
+                } else {
+                  addingTheNotes();
+                  Navigator.pop(context);
+                }
+              },
               child: Text("Add"),
               color: Colors.blue,
             ),

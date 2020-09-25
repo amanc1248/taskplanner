@@ -22,6 +22,9 @@ class _ProfilePageState extends State<ProfilePage> {
             middleText: "Profile",
           ),
           ProfileDetails(),
+          SizedBox(
+            height: 15,
+          ),
           Expanded(child: SettingList()),
           ExtraInfo(),
         ],

@@ -16,6 +16,7 @@ class _SkipDoneButtonState extends State<SkipDoneButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: widget.skipButtonList.length,

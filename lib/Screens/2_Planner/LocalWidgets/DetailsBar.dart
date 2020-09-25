@@ -37,14 +37,14 @@ class _DetailsBarState extends State<DetailsBar> {
                       height: 12,
                     ),
                     Text(
-                      widget.totalDays.toString(),
+                      widget.totalDays.toString() + " days",
                       style: mostTextStyle,
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     Text(
-                      widget.streakDays.toString(),
+                      widget.streakDays.toString() + " streak",
                       style: mostTextStyle,
                     )
                   ],
@@ -56,7 +56,7 @@ class _DetailsBarState extends State<DetailsBar> {
                       lineWidth: 5.0,
                       percent: widget.successRate,
                       center: new Text(
-                        "30%",
+                        (widget.successRate * 100).toString() + " %",
                         style: mostTextStyle,
                       ),
                       progressColor: Colors.green,

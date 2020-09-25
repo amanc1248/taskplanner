@@ -45,7 +45,7 @@ class _MainEntryFile extends State<MainEntryFile> {
           floatingActionButton: SpeedDial(
             animatedIconTheme: IconThemeData(size: 15.0),
             marginRight: MediaQuery.of(context).size.width / 2 - 15,
-            marginBottom: 50.0,
+            marginBottom: 45.0,
             child: Container(
               height: 35,
               width: 35,
@@ -53,7 +53,7 @@ class _MainEntryFile extends State<MainEntryFile> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(30),
                 ),
-                color: Colors.blue,
+                color: Color(0xFF7E5FF9),
               ),
               child: Icon(Icons.add),
             ),
@@ -110,42 +110,46 @@ class _MainEntryFile extends State<MainEntryFile> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 80,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Color(0xFF1F2024),
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              child: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.transparent,
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home), title: Text("Home")),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.event), title: Text("Planner")),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.add_circle,
-                          size: 40, color: Colors.transparent),
-                      title: Text("Add")),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.insert_drive_file,
-                      ),
-                      title: Text("Ideas")),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.account_circle,
-                      ),
-                      title: Text("Profile")),
-                ],
-                currentIndex: _selectedIndex,
-                selectedItemColor: Color(0xFF7E5FF9),
-                unselectedItemColor: Colors.grey,
-                onTap: _onItemTapped,
+          bottomNavigationBar: Container(
+            height: 70,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  //                    <--- top side
+                  color: Color(0xFF383940),
+                  width: 1.0,
+                ),
               ),
+              color: Color(0xFF1F2024),
+            ),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.transparent,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home), title: Text("Home")),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.event), title: Text("Planner")),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.add_circle,
+                        size: 25, color: Colors.transparent),
+                    title: Text("Add")),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.insert_drive_file,
+                    ),
+                    title: Text("Ideas")),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.account_circle,
+                    ),
+                    title: Text("Profile")),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Color(0xFF7E5FF9),
+              unselectedItemColor: Colors.grey,
+              onTap: _onItemTapped,
             ),
           ),
         ),
